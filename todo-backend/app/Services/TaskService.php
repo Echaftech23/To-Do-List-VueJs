@@ -28,8 +28,16 @@ class TaskService
         $data['user_id'] = $userId;
         $task = $this->taskRepository->create($data);
         
-        // Déclencher l'événement
-        event(new TaskCreated($task));
+        // Déclencher l'événement avec gestion d'erreur
+        try {
+            event(new TaskCreated($task));
+        } catch (\Exception $e) {
+            // Log l'erreur mais ne pas interrompre la création de la tâche
+            \Log::error('Erreur de broadcasting:', [
+                'message' => $e->getMessage(),
+                'task_id' => $task->id
+            ]);
+        }
         
         return $task;
     }
