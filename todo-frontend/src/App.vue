@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
     <Navbar v-if="authStore.isLoggedIn" />
 
     <main class="container mx-auto px-4 py-6">

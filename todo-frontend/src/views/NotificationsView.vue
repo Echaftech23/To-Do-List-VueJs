@@ -132,18 +132,14 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-white rounded-lg shadow-md p-6">
-      <div
-        class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0"
-      >
-        <div class="flex items-center space-x-4">
-          <label for="type-filter" class="text-sm font-medium text-gray-700"
-            >Filtrer par type :</label
-          >
+    <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-soft p-6 border border-white/20 animate-slide-up" style="animation-delay: 0.5s">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <label for="type-filter" class="block text-sm font-semibold text-secondary-700">Type de notification</label>
           <select
             id="type-filter"
             v-model="selectedType"
-            class="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+            class="block w-full pl-4 pr-10 py-3 text-sm border border-secondary-200 bg-white text-secondary-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 rounded-xl transition-all duration-200 shadow-sm hover:shadow-medium"
           >
             <option value="all">Tous les types</option>
             <option value="success">Succès</option>
@@ -153,12 +149,12 @@
           </select>
         </div>
 
-        <div class="flex items-center space-x-4">
-          <label for="date-filter" class="text-sm font-medium text-gray-700">Période :</label>
+        <div class="space-y-2">
+          <label for="date-filter" class="block text-sm font-semibold text-secondary-700">Période</label>
           <select
             id="date-filter"
             v-model="selectedPeriod"
-            class="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+            class="block w-full pl-4 pr-10 py-3 text-sm border border-secondary-200 bg-white text-secondary-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 rounded-xl transition-all duration-200 shadow-sm hover:shadow-medium"
           >
             <option value="all">Toutes les périodes</option>
             <option value="today">Aujourd'hui</option>

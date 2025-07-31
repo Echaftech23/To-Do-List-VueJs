@@ -4,35 +4,37 @@
       <div
         v-for="notification in visibleNotifications"
         :key="notification.id"
-        class="bg-white border-l-4 shadow-lg rounded-lg p-4 max-w-sm"
+        class="bg-white/95 backdrop-blur-md border-l-4 shadow-strong rounded-2xl p-5 max-w-sm border border-white/20"
         :class="getNotificationBorderClass(notification.type)"
       >
         <div class="flex items-start">
           <div class="flex-shrink-0">
-            <svg
-              class="h-5 w-5"
-              :class="getNotificationIconColor(notification.type)"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fill-rule="evenodd"
-                :d="getNotificationIcon(notification.type)"
-                clip-rule="evenodd"
-              />
-            </svg>
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center" :class="getNotificationBgClass(notification.type)">
+              <svg
+                class="h-5 w-5"
+                :class="getNotificationIconColor(notification.type)"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  :d="getNotificationIcon(notification.type)"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
           </div>
-          <div class="ml-3 flex-1">
-            <p class="text-sm font-medium text-gray-900">
+          <div class="ml-4 flex-1">
+            <p class="text-sm font-semibold text-secondary-900 mb-1">
               {{ notification.title || getDefaultTitle(notification.type) }}
             </p>
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-secondary-600 leading-relaxed">
               {{ notification.message }}
             </p>
           </div>
           <button
             @click="hideNotification(notification.id)"
-            class="ml-4 flex-shrink-0 text-gray-400 hover:text-gray-600"
+            class="ml-3 flex-shrink-0 text-secondary-400 hover:text-secondary-600 p-1 rounded-lg hover:bg-secondary-100 transition-all duration-200"
           >
             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -87,17 +89,27 @@ const getNotificationBorderClass = (type) => {
     success: 'border-green-500',
     error: 'border-red-500',
     warning: 'border-yellow-500',
-    info: 'border-blue-500',
+    info: 'border-primary-500',
+  }
+  return classes[type] || classes.info
+}
+
+const getNotificationBgClass = (type) => {
+  const classes = {
+    success: 'bg-green-100',
+    error: 'bg-red-100',
+    warning: 'bg-yellow-100',
+    info: 'bg-primary-100',
   }
   return classes[type] || classes.info
 }
 
 const getNotificationIconColor = (type) => {
   const classes = {
-    success: 'text-green-500',
-    error: 'text-red-500',
-    warning: 'text-yellow-500',
-    info: 'text-blue-500',
+    success: 'text-green-600',
+    error: 'text-red-600',
+    warning: 'text-yellow-600',
+    info: 'text-primary-600',
   }
   return classes[type] || classes.info
 }

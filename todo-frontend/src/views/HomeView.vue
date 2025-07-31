@@ -1,24 +1,26 @@
 <template>
   <div class="space-y-6">
     <!-- Header Section -->
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-soft p-8 border border-white/20 animate-slide-up">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900">
+          <h1 class="text-4xl font-bold text-secondary-800">
             Bonjour, {{ authStore.user?.full_name }} 👋
           </h1>
-          <p class="text-gray-600 mt-2">Voici un aperçu de vos tâches aujourd'hui</p>
+          <p class="text-secondary-600 mt-3 text-lg">Voici un aperçu de vos tâches aujourd'hui</p>
         </div>
         <div class="text-right">
-          <div class="text-2xl font-bold text-blue-600">
-            {{
-              new Date().toLocaleDateString('fr-FR', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })
-            }}
+          <div class="px-6 py-3 rounded-2xl bg-white/50">
+            <div class="text-sm font-medium text-secondary-600">Aujourd'hui</div>
+            <div class="text-lg font-bold text-secondary-900">
+              {{
+                new Date().toLocaleDateString('fr-FR', {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'short',
+                })
+              }}
+            </div>
           </div>
         </div>
       </div>
@@ -26,11 +28,11 @@
 
     <!-- Statistics Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+      <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-soft p-6 border border-white/20 hover-lift animate-slide-up" style="animation-delay: 0.1s">
         <div class="flex items-center">
-          <div class="p-3 rounded-full bg-blue-100">
+          <div class="p-4 rounded-2xl bg-gradient-to-r from-blue-100 to-indigo-200">
             <svg
-              class="h-6 w-6 text-blue-600"
+              class="h-7 w-7 text-blue-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -43,18 +45,18 @@
               />
             </svg>
           </div>
-          <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">Total des tâches</p>
-            <p class="text-2xl font-semibold text-gray-900">{{ tasksStore.totalTasks }}</p>
+          <div class="ml-5">
+            <p class="text-sm font-medium text-secondary-600">Total des tâches</p>
+            <p class="text-3xl font-bold text-secondary-900 mt-1">{{ tasksStore.totalTasks }}</p>
           </div>
         </div>
       </div>
 
-      <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+      <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-soft p-6 border border-white/20 hover-lift animate-slide-up" style="animation-delay: 0.2s">
         <div class="flex items-center">
-          <div class="p-3 rounded-full bg-green-100">
+          <div class="p-4 rounded-2xl bg-gradient-to-r from-green-100 to-emerald-200">
             <svg
-              class="h-6 w-6 text-green-600"
+              class="h-7 w-7 text-green-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -67,20 +69,20 @@
               />
             </svg>
           </div>
-          <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">Tâches terminées</p>
-            <p class="text-2xl font-semibold text-gray-900">
+          <div class="ml-5">
+            <p class="text-sm font-medium text-secondary-600">Tâches terminées</p>
+            <p class="text-3xl font-bold text-secondary-900 mt-1">
               {{ tasksStore.completedTasks.length }}
             </p>
           </div>
         </div>
       </div>
 
-      <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+      <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-soft p-6 border border-white/20 hover-lift animate-slide-up" style="animation-delay: 0.3s">
         <div class="flex items-center">
-          <div class="p-3 rounded-full bg-yellow-100">
+          <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-100 to-yellow-200">
             <svg
-              class="h-6 w-6 text-yellow-600"
+              class="h-7 w-7 text-amber-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -93,18 +95,18 @@
               />
             </svg>
           </div>
-          <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">En attente</p>
-            <p class="text-2xl font-semibold text-gray-900">{{ tasksStore.pendingTasks.length }}</p>
+          <div class="ml-5">
+            <p class="text-sm font-medium text-secondary-600">En attente</p>
+            <p class="text-3xl font-bold text-secondary-900 mt-1">{{ tasksStore.pendingTasks.length }}</p>
           </div>
         </div>
       </div>
 
-      <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+      <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-soft p-6 border border-white/20 hover-lift animate-slide-up" style="animation-delay: 0.4s">
         <div class="flex items-center">
-          <div class="p-3 rounded-full bg-purple-100">
+          <div class="p-4 rounded-2xl bg-gradient-to-r from-purple-100 to-violet-200">
             <svg
-              class="h-6 w-6 text-purple-600"
+              class="h-7 w-7 text-purple-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -117,9 +119,9 @@
               />
             </svg>
           </div>
-          <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">Progression</p>
-            <p class="text-2xl font-semibold text-gray-900">{{ tasksStore.completionRate }}%</p>
+          <div class="ml-5">
+            <p class="text-sm font-medium text-secondary-600">Progression</p>
+            <p class="text-3xl font-bold text-secondary-900 mt-1">{{ tasksStore.completionRate }}%</p>
           </div>
         </div>
       </div>
