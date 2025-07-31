@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,17 +7,57 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      redirect: '/tasks',
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('../views/HomeView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('../views/LoginView.vue'),
+      meta: { requiresGuest: true },
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/RegisterView.vue'),
+      meta: { requiresGuest: true },
+    },
+    {
+      path: '/tasks',
+      name: 'tasks',
+      component: () => import('../views/TasksView.vue'),
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/notifications',
+      name: 'notifications',
+      component: () => import('../views/NotificationsView.vue'),
+      meta: { requiresAuth: true },
     },
   ],
+})
+
+// Navigation guards
+router.beforeEach(async (to, from, next) => {
+  const authStore = useAuthStore()
+
+  // Vérifier si l'utilisateur est connecté au démarrage
+  if (authStore.token && !authStore.user) {
+    await authStore.getProfile()
+  }
+
+  if (to.meta.requiresAuth && !authStore.isLoggedIn) {
+    next('/login')
+  } else if (to.meta.requiresGuest && authStore.isLoggedIn) {
+    next('/tasks')
+  } else {
+    next()
+  }
 })
 
 export default router
